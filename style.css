@@ -2,7 +2,13 @@ body{
   padding: 100px;
 }
 .text-center{
-  background-color: tomato;
+  background-color:#28a745;
+  color: white;
+  box-shadow: 5px 5px 5px gray;
+  border-radius: 5px;
+  font-family: cursive;
+  padding: 5px;
+
 }
 .submit-area{
   margin-top: 50px;

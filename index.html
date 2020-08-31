@@ -24,19 +24,19 @@
       <div class="col-md-4">
         <div class="deposit status">
           <h5>Deposit</h5>
-          <h2>$00</h2>
+          <h2>$ <span id="currentDeposit">00</span></h2>
         </div>
       </div>
       <div class="col-md-4">
         <div class="withdraw status">
           <h5>Withdraw</h5>
-          <h2>$00</h2>
+          <h2>$ <span id="currentWithdraw">00</span></h2>
         </div>
       </div>
       <div class="col-md-4">
         <div class="balance status">
           <h5>Balance</h5>
-          <h2>$1240</h2>
+          <h2>$ <span id="currentBalance">1240</span></h2>
         </div>
       </div>
     </div>
@@ -44,22 +44,23 @@
       <div class="col-md-6">
         <div class="submit-area">
           <h4>Deposite</h4>
-          <input type="text" class="form-control" placeholder="$ amount you want to deposit">
+          <input id="depositeAmount" type="text" class="form-control" placeholder="$ amount you want to deposit">
           <br>
-          <button class="btn btn-success">Deposite</button>
+          <button id="addDeposite" class="btn btn-success">Deposite</button>
         </div>
       </div>
       <div class="col-md-6">
         <div class="submit-area">
           <h4>Withdraw</h4>
-          <input type="text" class="form-control" placeholder="$ amount you want to withdraw">
+          <input id="withdrawAmount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
           <br>
-          <button class="btn btn-success">Withdraw</button>
+          <button id="addWithdraw" class="btn btn-success">Withdraw</button>
         </div>
       </div>
     </div>
   </div>
   <script>
+    // login button event handler
     const loginBtn = document.getElementById("login");
      loginBtn.addEventListener("click", function () {
     const loginArea = document.getElementById("login-area");
@@ -67,6 +68,47 @@
     const transactionArea = document.getElementById("transaction-area");
     transactionArea.style.display = "block";
     })
+    // deposit button event handler
+    const depositBtn = document.getElementById("addDeposite");
+    depositBtn.addEventListener("click",function () {
+      const depositeNmbr = getInputNumber("depositeAmount");
+  
+      // its commendout because when i crete function in bottom its not neccesery but it is important for understand the code.
+
+      // const currentDeposit = document.getElementById("currentDeposit").innerText;
+      // const currentDepositNmbr = parseFloat(currentDeposit);
+      // const totalDeposit = currentDepositNmbr + depositeNmbr;
+      // document.getElementById("currentDeposit").innerText = totalDeposit;
+
+      UpdateSpanText("currentDeposit", depositeNmbr);
+      UpdateSpanText("currentBalance", depositeNmbr);
+       
+      document.getElementById("depositeAmount").value = "";
+
+    })
+    // withdraw button even handler
+    const withdrawBtn = document.getElementById("addWithdraw");
+    withdrawBtn.addEventListener("click",function () {
+      const withdrawNmbr = getInputNumber("withdrawAmount");
+       
+       UpdateSpanText("currentWithdraw", withdrawNmbr);
+       UpdateSpanText("currentBalance", -1 * withdrawNmbr);
+
+       document.getElementById("withdrawAmount").value = "";
+    })
+    function getInputNumber(id) {
+      const amount = document.getElementById(id).value;
+      const amountNmbr = parseFloat(amount);
+      return amountNmbr;
+    }
+   
+    function UpdateSpanText(id, depositeNmbr) {
+      const current = document.getElementById(id).innerText;
+       const currentNmbr = parseFloat(current);
+       const total = currentNmbr + depositeNmbr;
+      document.getElementById(id).innerText = total;
+    }
+
   </script>
 </body>
 </html>
